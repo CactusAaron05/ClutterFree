@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ project_name }}</title>
+    <link rel="icon" href="{{ url_for('static', filename='clutterfree_icon.png') }}" type="image/png" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #e0e7ff 0%, #f8fafc 100%);
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 12px 32px rgba(80, 84, 204, 0.14), 0 1.5px 4px #dbeafeaa;
+            border-radius: 18px;
+            padding: 48px 38px;
+            max-width: 470px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(15px);
+        }
+        .brand-logo {
+            max-width: 95px;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 2px 8px #94a3b8b8);
+        }
+        h1 {
+            color: #27275d;
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -1.2px;
+        }
+        h2 {
+            font-size: 1.12rem;
+            color: #8953ed;
+            font-weight: 700;
+            margin-bottom: 30px;
+            margin-top: 0;
+        }
+        .nav-btn-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+        .nav-btn {
+            background: linear-gradient(90deg, #a25fff 0%, #ff65b4 100%);
+            border: none;
+            padding: 11px 30px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.07rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 3px 10px #e9d5ff3a;
+            transition: background 0.23s;
+        }
+        .nav-btn:hover { background: linear-gradient(90deg, #ff65b4 0%, #a25fff 100%);}
+        form {
+            margin: 0 0 20px 0;
+        }
+        input[type="text"] {
+            width: 93%;
+            padding: 12px 14px;
+            border-radius: 7px;
+            border: 1.6px solid #e0e7ff;
+            font-size: 1.06rem;
+            margin: 10px 0 14px 0;
+            background: #f4f7ff;
+            color: #444;
+        }
+        .action-btn {
+            background: linear-gradient(90deg, #3f72ed 0%, #7e33c4 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 36px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px #d6e6ff4d;
+            transition: background 0.21s;
+        }
+        .action-btn:hover { background: linear-gradient(90deg, #a25fff 0%, #ff65b4 100%)!important;}
+        .message {
+            margin: 15px 0 8px 0;
+            font-weight: 700;
+            color: #5729ae;
+            background: #f3e8ff78;
+            padding: 8px 0;
+            border-radius: 8px;
+        }
+        .log {
+            background: #f9f8fded;
+            border-radius: 14px;
+            padding: 13px 16px 8px 18px;
+            margin-top: 15px;
+            box-shadow: 0 2px 12px #e3e1ff31;
+            font-size: 1.01rem;
+            max-height: 180px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #aaa;
+            margin-top: 23px;
+            letter-spacing: 0.4px;
+        }
+        .form-label {
+            font-size: 1.07rem;
+            font-weight: 600;
+            color: #686a7f;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img class="brand-logo" src="{{ url_for('static', filename='clutterfree_icon.png') }}" alt="{{ project_name }} Logo" />
+        <h1>{{ project_name }}</h1>
+        <h2>Sleek, Modern & Fast</h2>
+        <div class="nav-btn-group">
+            <button class="nav-btn" onclick="window.location.href='/report'">Show Report</button>
+            <button class="nav-btn" onclick="window.location.href='/help'">Help</button>
+        </div>
+        <form method="post">
+            <div class="form-label">Select Directory to Organize:</div>
+            <input type="text" id="directory" name="directory" required placeholder="C:/Users/yourname/Documents/Downloads" />
+            <br>
+            <button type="submit" class="action-btn">Start Organization</button>
+        </form>
+        {% if message %}
+        <div class="message">{{ message }}</div>
+        {% endif %}
+        {% if logs %}
+        <div class="log">
+            <strong>Operations Log:</strong>
+            <ul>
+                {% for log in logs %}
+                <li>{{ log }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <div class="footer">&copy; 2025 {{ project_name }}</div>
+    </div>
+</body>
+</html>
